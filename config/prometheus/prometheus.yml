@@ -38,38 +38,16 @@ scrape_configs:
         labels:
           service: blackbox-exporter
 
-  - job_name: gavilan-calidad-node
-    scrape_interval: 30s
-    static_configs:
-      - targets:
-          - 100.122.245.71:9182
-        labels:
-          host: gavilan-calidad
-          env: production
+#######################################
+##########    WEBSITES     ############
+#######################################
 
-  - job_name: romabilibov-website-node
-    scrape_interval: 30s
-    static_configs:
-      - targets:
-          - 100.65.83.29:9100
-        labels:
-          host: romabilibov-website
-          env: production
-
-  - job_name: romabilibov-website-cadvisor
-    scrape_interval: 30s
-    static_configs:
-      - targets:
-          - 100.65.83.29:8081
-        labels:
-          host: romabilibov-website
-          env: production
-
+#### - Desarrollo AIW - LINUX
   - job_name: desarrollo-aiw-node
     scrape_interval: 30s
     static_configs:
       - targets:
-          - 100.114.54.119:9100
+          - desarrollo-appinwhats.tailac8191.ts.net:9100
         labels:
           host: desarrollo-aiw
           env: production
@@ -78,16 +56,26 @@ scrape_configs:
     scrape_interval: 30s
     static_configs:
       - targets:
-          - 100.114.54.119:18080
+          - desarrollo-appinwhats.tailac8191.ts.net:18080
         labels:
           host: desarrollo-aiw
+          env: production
+
+#### - Gavilan Calidad - WINDOWS
+  - job_name: gavilan-calidad-node
+    scrape_interval: 30s
+    static_configs:
+      - targets:
+          - gavilan-calidad.tailac8191.ts.net:9182
+        labels:
+          host: gavilan-calidad
           env: production
 
   - job_name: gavilan-calidad-cadvisor
     scrape_interval: 30s
     static_configs:
       - targets:
-          - 100.122.245.71:18080
+          - gavilan-calidad.tailac8191.ts.net:18080
         labels:
           host: gavilan-calidad
           env: production
