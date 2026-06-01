@@ -1,0 +1,44 @@
+server:
+  http_listen_port: 19080
+  grpc_listen_port: 0
+
+positions:
+  filename: C:\promtail\positions.yaml
+
+clients:
+  - url: http://100.120.175.82:3100/loki/api/v1/push
+
+scrape_configs:
+  - job_name: windows-events
+    windows_events:
+      eventlog_name: System
+      bookmark_path: C:\promtail\bookmark-system.xml
+      poll_interval: 3s
+    relabel_configs:
+      - source_labels: [__meta_windows_event_id]
+        target_label: event_id
+      - source_labels: [__meta_windows_event_level]
+        target_label: level
+      - source_labels: [__meta_windows_event_provider]
+        target_label: provider
+      - target_label: job
+        replacement: syslog
+      - target_label: host
+        replacement: gavilan-calidad
+
+  - job_name: windows-events-app
+    windows_events:
+      eventlog_name: Application
+      bookmark_path: C:\promtail\bookmark-application.xml
+      poll_interval: 3s
+    relabel_configs:
+      - source_labels: [__meta_windows_event_id]
+        target_label: event_id
+      - source_labels: [__meta_windows_event_level]
+        target_label: level
+      - source_labels: [__meta_windows_event_provider]
+        target_label: provider
+      - target_label: job
+        replacement: syslog
+      - target_label: host
+        replacement: gavilan-calidad

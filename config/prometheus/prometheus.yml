@@ -1,0 +1,93 @@
+global:
+  scrape_interval: 15s
+  scrape_timeout: 10s
+  evaluation_interval: 30s
+  external_labels:
+    env: ${ENV:production}
+    region: ${REGION:default}
+
+rule_files:
+  - /etc/prometheus/rules/*.yml
+
+scrape_configs:
+  - job_name: prometheus
+    static_configs:
+      - targets:
+          - localhost:9090
+        labels:
+          service: prometheus
+
+  - job_name: grafana
+    static_configs:
+      - targets:
+          - grafana:3000
+        labels:
+          service: grafana
+
+  - job_name: loki
+    static_configs:
+      - targets:
+          - loki:3100
+        labels:
+          service: loki
+
+  - job_name: blackbox
+    static_configs:
+      - targets:
+          - blackbox-exporter:9115
+        labels:
+          service: blackbox-exporter
+
+  - job_name: gavilan-calidad-node
+    scrape_interval: 30s
+    static_configs:
+      - targets:
+          - 100.122.245.71:9182
+        labels:
+          host: gavilan-calidad
+          env: production
+
+  - job_name: romabilibov-website-node
+    scrape_interval: 30s
+    static_configs:
+      - targets:
+          - 100.65.83.29:9100
+        labels:
+          host: romabilibov-website
+          env: production
+
+  - job_name: romabilibov-website-cadvisor
+    scrape_interval: 30s
+    static_configs:
+      - targets:
+          - 100.65.83.29:8081
+        labels:
+          host: romabilibov-website
+          env: production
+
+  - job_name: desarrollo-aiw-node
+    scrape_interval: 30s
+    static_configs:
+      - targets:
+          - 100.114.54.119:9100
+        labels:
+          host: desarrollo-aiw
+          env: production
+
+  - job_name: desarrollo-aiw-cadvisor
+    scrape_interval: 30s
+    static_configs:
+      - targets:
+          - 100.114.54.119:18080
+        labels:
+          host: desarrollo-aiw
+          env: production
+
+  - job_name: gavilan-calidad-cadvisor
+    scrape_interval: 30s
+    static_configs:
+      - targets:
+          - 100.122.245.71:18080
+        labels:
+          host: gavilan-calidad
+          env: production

@@ -1,0 +1,3 @@
+# Alerts moved to Grafana unified alerting
+# See config/grafana/provisioning/alerting/rules.yml
+groups: []

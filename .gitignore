@@ -1,0 +1,19 @@
+# Environment (contains secrets)
+.env
+
+# Runtime-generated configs (none currently)
+
+# Docker volumes (created at runtime)
+/data/
+
+# Backups
+*.sql
+*.dump
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# AI instructions
+AGENTS.md
+Implementation.md

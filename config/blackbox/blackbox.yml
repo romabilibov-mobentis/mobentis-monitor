@@ -1,0 +1,12 @@
+modules:
+  http_2xx_4xx:
+    prober: http
+    timeout: 10s
+    http:
+      valid_http_versions: ["HTTP/1.1", "HTTP/2"]
+      valid_status_codes: [200, 201, 202, 204, 301, 302, 304, 307, 308, 400, 401, 403, 404, 405, 410, 422, 429]
+      method: GET
+      no_follow_redirects: false
+      fail_if_ssl: false
+      fail_if_not_ssl: false
+      preferred_ip_protocol: "ip4"
