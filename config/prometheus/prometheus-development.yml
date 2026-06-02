@@ -1,0 +1,62 @@
+global:
+  scrape_interval: 15s
+  scrape_timeout: 10s
+  evaluation_interval: 30s
+  external_labels:
+    env: ${ENV:production}
+    region: ${REGION:default}
+
+rule_files:
+  - /etc/prometheus/rules/*.yml
+
+scrape_configs:
+  - job_name: prometheus
+    static_configs:
+      - targets:
+          - localhost:9090
+        labels:
+          service: prometheus
+
+  - job_name: grafana
+    static_configs:
+      - targets:
+          - grafana:3000
+        labels:
+          service: grafana
+
+  - job_name: loki
+    static_configs:
+      - targets:
+          - loki:3100
+        labels:
+          service: loki
+
+  - job_name: blackbox
+    static_configs:
+      - targets:
+          - blackbox-exporter:9115
+        labels:
+          service: blackbox-exporter
+
+#######################################
+##########    WEBSITES     ############
+#######################################
+
+#### - Development - LINUX
+  - job_name: development-node
+    scrape_interval: 30s
+    static_configs:
+      - targets:
+          - romabilibov-website.taild75459.ts.net:9100
+        labels:
+          host: dev-test
+          env: production
+
+  - job_name: dev-test-cadvisor
+    scrape_interval: 30s
+    static_configs:
+      - targets:
+          - romabilibov-website.taild75459.ts.net:8081
+        labels:
+          host: dev-test
+          env: production

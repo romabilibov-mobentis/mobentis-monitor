@@ -1,0 +1,17 @@
+services:
+  prometheus:
+    volumes:
+      - ./config/prometheus/prometheus-development.yml:/etc/prometheus/prometheus.yml:ro
+
+  grafana:
+    ports:
+      - 3000:3000
+
+  maildev:
+    image: maildev/maildev:latest
+    container_name: maildev
+    restart: unless-stopped
+    networks:
+      - monitoring_net
+    labels:
+      com.mobentis.service: maildev
